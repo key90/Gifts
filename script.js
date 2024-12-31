@@ -1,23 +1,17 @@
-const giftWheel = document.getElementById('giftWheel');
+const giftCircle = document.getElementById('giftCircle');
+let isSpinning = false;
+let rotation = 0;
 
-let spinning = false;
-let angle = 0;
-
-giftWheel.addEventListener('click', () => {
-  if (!spinning) {
-    spinning = true;
-    spinWheel();
+function spinCircle() {
+  if (!isSpinning) {
+    isSpinning = true;
+    const spin = () => {
+      rotation += 2; // Скорость вращения
+      giftCircle.style.transform = `rotate(${rotation}deg)`;
+      requestAnimationFrame(spin);
+    };
+    spin();
   }
-});
-
-function spinWheel() {
-  // Каждое вращение на 45 градусов (поскольку круг разделен на 8 частей)
-  angle += 45;
-  giftWheel.style.transition = "transform 3s cubic-bezier(0.25, 0.8, 0.25, 1)";
-  giftWheel.style.transform = `rotate(${angle}deg)`;
-  
-  // После завершения вращения запускаем заново
-  giftWheel.addEventListener('transitionend', () => {
-    spinWheel();
-  }, { once: true });
 }
+
+giftCircle.addEventListener('click', spinCircle);
