@@ -1,12 +1,19 @@
 const giftCircle = document.getElementById('giftCircle');
+let isSpinning = false;
 let rotation = 0;
 
-// Бесконечное вращение круга
+// Функция для бесконечного вращения
 function spinCircle() {
-  rotation += 2; // Скорость вращения
-  giftCircle.style.transform = `rotate(${rotation}deg)`;
-  requestAnimationFrame(spinCircle);
+  if (!isSpinning) {
+    isSpinning = true;
+    const spin = () => {
+      rotation += 2; // Скорость вращения
+      giftCircle.style.transform = `rotate(${rotation}deg)`;
+      requestAnimationFrame(spin);
+    };
+    spin();
+  }
 }
 
-// Запуск вращения
-spinCircle();
+// Запуск вращения при клике на круг
+giftCircle.addEventListener('click', spinCircle);
