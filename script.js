@@ -1,17 +1,12 @@
 const giftCircle = document.getElementById('giftCircle');
-let isSpinning = false;
 let rotation = 0;
 
+// Бесконечное вращение круга
 function spinCircle() {
-  if (!isSpinning) {
-    isSpinning = true;
-    const spin = () => {
-      rotation += 2; // Скорость вращения
-      giftCircle.style.transform = `rotate(${rotation}deg)`;
-      requestAnimationFrame(spin);
-    };
-    spin();
-  }
+  rotation += 2; // Скорость вращения
+  giftCircle.style.transform = `rotate(${rotation}deg)`;
+  requestAnimationFrame(spinCircle);
 }
 
-giftCircle.addEventListener('click', spinCircle);
+// Запуск вращения
+spinCircle();
